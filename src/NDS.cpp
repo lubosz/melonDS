@@ -79,6 +79,8 @@ thread_local NDS* NDS::Current = nullptr;
 NDS::NDS() noexcept :
     NDS(
         NDSArgs {
+            nullptr,
+            nullptr,
             std::make_unique<ARM9BIOSImage>(bios_arm9_bin),
             std::make_unique<ARM7BIOSImage>(bios_arm7_bin),
             Firmware(0),
@@ -100,8 +102,8 @@ NDS::NDS(NDSArgs&& args, int type, void* userdata) noexcept :
     SPI(*this, std::move(args.Firmware)),
     RTC(*this),
     Wifi(*this),
-    NDSCartSlot(*this, nullptr),
-    GBACartSlot(*this, nullptr),
+    NDSCartSlot(*this, std::move(args.NDSROM)),
+    GBACartSlot(*this, type == 1 ? nullptr : std::move(args.GBAROM)),
     AREngine(*this),
     ARM9(*this, args.GDB, args.JIT.has_value()),
     ARM7(*this, args.GDB, args.JIT.has_value()),
