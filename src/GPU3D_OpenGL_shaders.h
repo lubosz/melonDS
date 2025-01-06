@@ -38,12 +38,14 @@ void main()
 
 const char* kClearFS = kShaderHeader R"(
 
+#extension GL_ARB_explicit_attrib_location : enable
+
 uniform uvec4 uColor;
 uniform uint uOpaquePolyID;
 uniform uint uFogFlag;
 
-out vec4 oColor;
-out vec4 oAttr;
+layout (location = 0) out vec4 oColor;
+layout (location = 1) out vec4 oAttr;
 
 void main()
 {
@@ -242,6 +244,8 @@ flat out ivec3 fPolygonAttr;
 
 const char* kRenderFSCommon = R"(
 
+#extension GL_ARB_explicit_attrib_location : enable
+
 uniform usampler2D TexMem;
 uniform sampler2D TexPalMem;
 
@@ -261,8 +265,8 @@ smooth in vec4 fColor;
 smooth in vec2 fTexcoord;
 flat in ivec3 fPolygonAttr;
 
-out vec4 oColor;
-out vec4 oAttr;
+layout (location = 0) out vec4 oColor;
+layout (location = 1) out vec4 oAttr;
 
 int TexcoordWrap(int c, int maxc, int mode)
 {
