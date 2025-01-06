@@ -1296,7 +1296,8 @@ void GLRenderer::PrepareCaptureFrame()
     glBindFramebuffer(GL_READ_FRAMEBUFFER, MainFramebuffer);
     glReadBuffer(GL_COLOR_ATTACHMENT0);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, DownscaleFramebuffer);
-    glDrawBuffer(GL_COLOR_ATTACHMENT0);
+    const GLenum bufs[1] = {GL_COLOR_ATTACHMENT0};
+    glDrawBuffers(1, bufs);
     glBlitFramebuffer(0, 0, ScreenW, ScreenH, 0, 0, 256, 192, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
     glBindBuffer(GL_PIXEL_PACK_BUFFER, PixelbufferID);
