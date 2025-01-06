@@ -1099,8 +1099,9 @@ u32* ComputeRenderer::GetLine(int line)
     if (line == 0)
     {
         glBindBuffer(GL_PIXEL_PACK_BUFFER, PixelBuffer);
-        u8* data = (u8*)glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
-        if (data) memcpy(&FramebufferCPU[0], data, 4*stride*192);
+        const size_t bufferSize = 4 * stride * 192;
+        u8* data = (u8*)glMapBufferRange(GL_PIXEL_PACK_BUFFER, 0, bufferSize, GL_READ_ONLY);
+        if (data) memcpy(&FramebufferCPU[0], data, bufferSize);
         glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
     }
 

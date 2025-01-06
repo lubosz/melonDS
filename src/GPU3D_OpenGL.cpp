@@ -1171,9 +1171,13 @@ void GLRenderer::RenderFrame(GPU& gpu)
     ShaderConfig.uFogShift = gpu.GPU3D.RenderFogShift;
 
     glBindBuffer(GL_UNIFORM_BUFFER, ShaderConfigUBO);
-    void* unibuf = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
-    if (unibuf) memcpy(unibuf, &ShaderConfig, sizeof(ShaderConfig));
-    glUnmapBuffer(GL_UNIFORM_BUFFER);
+    void* unibuf = glMapBufferRange(GL_UNIFORM_BUFFER, 0, sizeof(ShaderConfig), GL_MAP_WRITE_BIT);
+    if (unibuf == nullptr) {
+        printf("ERROR: Could not map shader config buffer!\n");
+    } else {
+        memcpy(unibuf, &ShaderConfig, sizeof(ShaderConfig));
+        glUnmapBuffer(GL_UNIFORM_BUFFER);
+    }
 
     // SUCKY!!!!!!!!!!!!!!!!!!
     // TODO: detect when VRAM blocks are modified!
@@ -1322,9 +1326,14 @@ u32* GLRenderer::GetLine(int line)
     if (line == 0)
     {
         glBindBuffer(GL_PIXEL_PACK_BUFFER, PixelbufferID);
-        u8* data = (u8*)glMapBuffer(GL_PIXEL_PACK_BUFFER, GL_READ_ONLY);
-        if (data) memcpy(&Framebuffer[stride*0], data, 4*stride*192);
-        glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+        const size_t bufferSize = 4 * stride * 192;
+        u8* data = (u8*)glMapBufferRange(GL_PIXEL_PACK_BUFFER, 0, bufferSize, GL_MAP_READ_BIT);
+        if (data == nullptr) {
+            printf("ERROR: Could not map pixel pack buffer!\n");
+        } else {
+            memcpy(&Framebuffer[stride*0], data, bufferSize);
+            glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
+        }
     }
 
     u64* ptr = (u64*)&Framebuffer[stride * line];
