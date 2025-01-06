@@ -150,12 +150,19 @@ else()
     target_sources(melonDS PRIVATE
         ../duckstation/gl/context_egl.cpp
         ../duckstation/gl/context_egl_x11.cpp
-        ../duckstation/gl/context_glx.cpp
         ../duckstation/gl/x11_window.cpp
 
         ../glad/glad_egl.c
-        ../glad/glad_glx.c
     )
+
+    if (USE_OPENGL_ES)
+    else()
+        target_sources(melonDS PRIVATE
+            ../duckstation/gl/context_glx.cpp
+            ../glad/glad_glx.c
+        )
+    endif()
+
     target_link_libraries(melonDS PRIVATE "${X11_LIBRARIES}" "${EGL_LIBRARIES}")
     target_include_directories(melonDS PRIVATE "${X11_INCLUDE_DIR}")
     add_compile_definitions(QAPPLICATION_CLASS=QApplication)
@@ -259,7 +266,11 @@ elseif(APPLE)
 endif()
 
 if (ENABLE_OGLRENDERER)
-    set(MELONDS_GL_HEADER \"frontend/glad/glad_gl43.h\" CACHE STRING "Path to a header that contains OpenGL function and type declarations.")
+    if (USE_OPENGL_ES)
+        set(MELONDS_GL_HEADER \"frontend/glad/glad_gles32.h\" CACHE STRING "Path to a header that contains OpenGL function and type declarations.")
+    else()
+        set(MELONDS_GL_HEADER \"frontend/glad/glad_gl43.h\" CACHE STRING "Path to a header that contains OpenGL function and type declarations.")
+    endif()
 
     target_compile_definitions(melonDS PUBLIC OGLRENDERER_ENABLED)
     target_compile_definitions(melonDS PUBLIC MELONDS_GL_HEADER=${MELONDS_GL_HEADER})

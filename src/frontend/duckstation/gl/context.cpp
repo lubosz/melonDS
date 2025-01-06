@@ -15,7 +15,9 @@ Log_SetChannel(GL::Context);
 #include "context_egl_wayland.h"
 #endif
 #include "context_egl_x11.h"
+#if !defined(USE_OPENGL_ES)
 #include "context_glx.h"
+#endif
 #endif
 
 namespace GL {
@@ -71,11 +73,15 @@ std::unique_ptr<GL::Context> Context::Create(const WindowInfo& wi, const Version
 #else
   if (wi.type == WindowInfo::Type::X11)
   {
+    #if defined(USE_OPENGL_ES)
+    context = ContextEGLX11::Create(wi, versions_to_try, num_versions_to_try);
+    #else
     const char* use_egl_x11 = std::getenv("USE_EGL_X11");
     if (use_egl_x11 && std::strcmp(use_egl_x11, "1") == 0)
       context = ContextEGLX11::Create(wi, versions_to_try, num_versions_to_try);
     else
       context = ContextGLX::Create(wi, versions_to_try, num_versions_to_try);
+    #endif
   }
 
 #ifdef WAYLAND_ENABLED
@@ -93,7 +99,11 @@ std::unique_ptr<GL::Context> Context::Create(const WindowInfo& wi, const Version
   static Context* context_being_created;
   context_being_created = context.get();
 
+#if defined(USE_OPENGL_ES)
+  if (!gladLoadGLES2Loader([](const char* name) { return context_being_created->GetProcAddress(name); }))
+#else
   if (!gladLoadGLLoader([](const char* name) { return context_being_created->GetProcAddress(name); }))
+#endif
   {
     Log_ErrorPrintf("Failed to load GL functions for GLAD");
     return nullptr;
