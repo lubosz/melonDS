@@ -1117,7 +1117,9 @@ void ComputeRenderer::PrepareCaptureFrame()
 {
     glBindBuffer(GL_PIXEL_PACK_BUFFER, PixelBuffer);
     glBindTexture(GL_TEXTURE_2D, LowResFramebuffer);
+#if !defined(USE_OPENGL_ES)
     glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA_INTEGER, GL_UNSIGNED_BYTE, nullptr);
+#endif
 }
 
 void ComputeRenderer::BindOutputTexture(int buffer)
