@@ -19,7 +19,11 @@
 #ifndef MAIN_SHADERS_H
 #define MAIN_SHADERS_H
 
-#define kShaderHeader "#version 140"
+#if !defined(USE_OPENGL_ES)
+    #define kShaderHeader "#version 140"
+#else
+    #define kShaderHeader "#version 320 es"
+#endif
 
 const char* kScreenVS = kShaderHeader R"(
 

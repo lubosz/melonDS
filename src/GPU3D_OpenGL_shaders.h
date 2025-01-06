@@ -19,7 +19,11 @@
 #ifndef GPU3D_OPENGL_SHADERS_H
 #define GPU3D_OPENGL_SHADERS_H
 
-#define kShaderHeader "#version 140"
+#if !defined(USE_OPENGL_ES)
+    #define kShaderHeader "#version 140"
+#else
+    #define kShaderHeader "#version 320 es"
+#endif
 
 namespace melonDS
 {
