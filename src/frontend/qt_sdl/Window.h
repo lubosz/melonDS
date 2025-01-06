@@ -19,7 +19,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include "glad/glad.h"
+#include "glad/glad_gl43.h"
 #include "ScreenLayout.h"
 #include "duckstation/gl/context.h"
 

@@ -30,7 +30,7 @@
 #include <QCloseEvent>
 #include <QTimer>
 
-#include "glad/glad.h"
+#include "glad/glad_gl43.h"
 #include "ScreenLayout.h"
 #include "duckstation/gl/context.h"
 

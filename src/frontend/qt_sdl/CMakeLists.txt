@@ -47,7 +47,7 @@ set(SOURCES_QT_SDL
     ../ScreenLayout.cpp
     ../mic_blow.h
 
-    ../glad/glad.c
+    ../glad/glad_gl43.c
     ../duckstation/gl/context.cpp
 
     ${CMAKE_SOURCE_DIR}/res/melon.qrc
@@ -254,7 +254,7 @@ elseif(APPLE)
 endif()
 
 if (ENABLE_OGLRENDERER)
-    set(MELONDS_GL_HEADER \"frontend/glad/glad.h\" CACHE STRING "Path to a header that contains OpenGL function and type declarations.")
+    set(MELONDS_GL_HEADER \"frontend/glad/glad_gl43.h\" CACHE STRING "Path to a header that contains OpenGL function and type declarations.")
 
     target_compile_definitions(melonDS PUBLIC OGLRENDERER_ENABLED)
     target_compile_definitions(melonDS PUBLIC MELONDS_GL_HEADER=${MELONDS_GL_HEADER})

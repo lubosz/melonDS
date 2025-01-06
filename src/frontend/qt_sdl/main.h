@@ -19,7 +19,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "glad/glad.h"
+#include "glad/glad_gl43.h"
 
 #include <QApplication>
 #include <QEvent>

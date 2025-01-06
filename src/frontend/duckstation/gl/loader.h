@@ -5,4 +5,4 @@
 #include "../windows_headers.h"
 #endif
 
-#include "../../glad/glad.h"
+#include "../../glad/glad_gl43.h"
