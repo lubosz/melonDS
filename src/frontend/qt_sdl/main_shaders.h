@@ -53,6 +53,8 @@ void main()
 
 const char* kScreenFS = kShaderHeader R"(
 
+precision mediump float;
+
 uniform sampler2D ScreenTex;
 
 smooth in vec2 fTexcoord;

@@ -48,6 +48,8 @@ void main()
 
 const char* kCompositorFS_Nearest = kShaderHeader R"(
 
+precision mediump float;
+
 uniform uint u3DScale;
 
 uniform usampler2D ScreenTex;
@@ -174,6 +176,8 @@ void main()
 
 
 const char* kCompositorFS_Linear = kShaderHeader R"(
+
+precision mediump float;
 
 uniform uint u3DScale;
 
@@ -415,6 +419,8 @@ void main()
 )";
 
 const char* kCompositorFS_xBRZ = kShaderHeader R"(
+
+precision mediump float;
 
 #define BLEND_NONE 0
 #define BLEND_NORMAL 1

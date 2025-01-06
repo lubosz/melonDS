@@ -57,6 +57,8 @@ void main()
 
 const char* kScreenFS_OSD = kShaderHeader R"(
 
+precision mediump float;
+
 uniform sampler2D OSDTex;
 
 smooth in vec2 fTexcoord;

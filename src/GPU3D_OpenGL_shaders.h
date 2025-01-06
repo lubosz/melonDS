@@ -44,6 +44,8 @@ const char* kClearFS = kShaderHeader R"(
 
 #extension GL_ARB_explicit_attrib_location : enable
 
+precision mediump float;
+
 uniform uvec4 uColor;
 uniform uint uOpaquePolyID;
 uniform uint uFogFlag;
@@ -75,6 +77,8 @@ void main()
 )";
 
 const char* kFinalPassEdgeFS = kShaderHeader R"(
+
+precision mediump float;
 
 uniform sampler2D DepthBuffer;
 uniform sampler2D AttrBuffer;
@@ -157,6 +161,8 @@ void main()
 )";
 
 const char* kFinalPassFogFS = kShaderHeader R"(
+
+precision mediump float;
 
 uniform sampler2D DepthBuffer;
 uniform sampler2D AttrBuffer;
@@ -249,6 +255,8 @@ flat out ivec3 fPolygonAttr;
 const char* kRenderFSCommon = R"(
 
 #extension GL_ARB_explicit_attrib_location : enable
+
+precision mediump float;
 
 uniform usampler2D TexMem;
 uniform sampler2D TexPalMem;
@@ -680,6 +688,8 @@ void main()
 
 const char* kRenderVS_W = R"(
 
+precision mediump float;
+
 smooth out float fZ;
 
 void main()
@@ -705,6 +715,8 @@ void main()
 
 const char* kRenderFS_ZO = R"(
 
+precision mediump float;
+
 void main()
 {
     vec4 col = FinalColor();
@@ -719,6 +731,8 @@ void main()
 )";
 
 const char* kRenderFS_WO = R"(
+
+precision mediump float;
 
 smooth in float fZ;
 
@@ -738,6 +752,8 @@ void main()
 
 const char* kRenderFS_ZE = R"(
 
+precision mediump float;
+
 void main()
 {
     vec4 col = FinalColor();
@@ -749,6 +765,8 @@ void main()
 )";
 
 const char* kRenderFS_WE = R"(
+
+precision mediump float;
 
 smooth in float fZ;
 
@@ -765,6 +783,8 @@ void main()
 
 const char* kRenderFS_ZT = R"(
 
+precision mediump float;
+
 void main()
 {
     vec4 col = FinalColor();
@@ -778,6 +798,8 @@ void main()
 )";
 
 const char* kRenderFS_WT = R"(
+
+precision mediump float;
 
 smooth in float fZ;
 
@@ -796,6 +818,8 @@ void main()
 
 const char* kRenderFS_ZSM = R"(
 
+precision mediump float;
+
 void main()
 {
     oColor = vec4(0.0, 0.0, 0.0, 1.0);
@@ -803,6 +827,8 @@ void main()
 )";
 
 const char* kRenderFS_WSM = R"(
+
+precision mediump float;
 
 smooth in float fZ;
 
