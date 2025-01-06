@@ -52,7 +52,7 @@ precision mediump float;
 
 uniform uint u3DScale;
 
-uniform usampler2D ScreenTex;
+mediump uniform usampler2D ScreenTex;
 uniform sampler2D _3DTex;
 
 smooth in vec2 fTexcoord;
@@ -181,7 +181,7 @@ precision mediump float;
 
 uniform uint u3DScale;
 
-uniform usampler2D ScreenTex;
+mediump uniform usampler2D ScreenTex;
 uniform sampler2D _3DTex;
 
 smooth in vec2 fTexcoord;
@@ -453,7 +453,7 @@ precision mediump float;
 
 uniform uint u3DScale;
 
-uniform usampler2D ScreenTex;
+mediump uniform usampler2D ScreenTex;
 uniform sampler2D _3DTex;
 
 smooth in vec2 fTexcoord;

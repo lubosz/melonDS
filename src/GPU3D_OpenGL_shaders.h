@@ -258,7 +258,7 @@ const char* kRenderFSCommon = R"(
 
 precision mediump float;
 
-uniform usampler2D TexMem;
+mediump uniform usampler2D TexMem;
 uniform sampler2D TexPalMem;
 
 layout(std140) uniform uConfig
