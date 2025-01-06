@@ -79,7 +79,7 @@ void main()
 
             float xpos = fTexcoord.x + _3dxpos;
             float ypos = mod(fTexcoord.y, 192.0f);
-            ivec4 _3dpix = ivec4(texelFetch(_3DTex, ivec2(vec2(xpos, ypos)*u3DScale), 0).bgra
+            ivec4 _3dpix = ivec4(texelFetch(_3DTex, ivec2(xpos, ypos)*int(u3DScale), 0).bgra
                          * vec4(63,63,63,31));
 
             if (_3dpix.a > 0)
@@ -99,7 +99,7 @@ void main()
 
             float xpos = fTexcoord.x + _3dxpos;
             float ypos = mod(fTexcoord.y, 192.0f);
-            ivec4 _3dpix = ivec4(texelFetch(_3DTex, ivec2(vec2(xpos, ypos)*u3DScale), 0).bgra
+            ivec4 _3dpix = ivec4(texelFetch(_3DTex, ivec2(xpos, ypos)*int(u3DScale), 0).bgra
                          * vec4(63,63,63,31));
 
             if (_3dpix.a > 0)
@@ -119,7 +119,7 @@ void main()
 
             float xpos = fTexcoord.x + _3dxpos;
             float ypos = mod(fTexcoord.y, 192.0f);
-            ivec4 _3dpix = ivec4(texelFetch(_3DTex, ivec2(vec2(xpos, ypos)*u3DScale), 0).bgra
+            ivec4 _3dpix = ivec4(texelFetch(_3DTex, ivec2(xpos, ypos)*int(u3DScale), 0).bgra
                          * vec4(63,63,63,31));
 
             if (_3dpix.a > 0)
@@ -182,7 +182,7 @@ out vec4 oColor;
 
 ivec4 Get3DPixel(vec2 pos)
 {
-    return ivec4(texelFetch(_3DTex, ivec2(pos*u3DScale), 0).bgra
+    return ivec4(texelFetch(_3DTex, ivec2(pos)*int(u3DScale), 0).bgra
          * vec4(63,63,63,31));
 }
 
@@ -486,7 +486,7 @@ vec4 Get2DPixel(vec2 texcoord, int level)
 
 ivec4 Get3DPixel(vec2 pos)
 {
-    return ivec4(texelFetch(_3DTex, ivec2(pos*u3DScale), 0).bgra
+    return ivec4(texelFetch(_3DTex, ivec2(pos)*int(u3DScale), 0).bgra
          * vec4(63,63,63,31));
 }
 
