@@ -19,7 +19,9 @@
 #ifndef OSD_SHADERS_H
 #define OSD_SHADERS_H
 
-const char* kScreenVS_OSD = R"(#version 140
+#define kShaderHeader "#version 140"
+
+const char* kScreenVS_OSD = kShaderHeader R"(
 
 uniform vec2 uScreenSize;
 
@@ -49,7 +51,7 @@ void main()
 }
 )";
 
-const char* kScreenFS_OSD = R"(#version 140
+const char* kScreenFS_OSD = kShaderHeader R"(
 
 uniform sampler2D OSDTex;
 

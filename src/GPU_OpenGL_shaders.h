@@ -19,9 +19,11 @@
 #ifndef GPU_OPENGL_SHADERS_H
 #define GPU_OPENGL_SHADERS_H
 
+#define kShaderHeader "#version 140"
+
 namespace melonDS
 {
-const char* kCompositorVS = R"(#version 140
+const char* kCompositorVS = kShaderHeader R"(
 
 in vec2 vPosition;
 in vec2 vTexcoord;
@@ -40,7 +42,7 @@ void main()
 }
 )";
 
-const char* kCompositorFS_Nearest = R"(#version 140
+const char* kCompositorFS_Nearest = kShaderHeader R"(
 
 uniform uint u3DScale;
 
@@ -167,7 +169,7 @@ void main()
 
 
 
-const char* kCompositorFS_Linear = R"(#version 140
+const char* kCompositorFS_Linear = kShaderHeader R"(
 
 uniform uint u3DScale;
 
@@ -327,7 +329,7 @@ void main()
 
 // HUGE TEST ZONE ARRLGD
 
-const char* kCompositorVS_xBRZ = R"(#version 140
+const char* kCompositorVS_xBRZ = kShaderHeader R"(
 
 #define BLEND_NONE 0
 #define BLEND_NORMAL 1
@@ -408,7 +410,7 @@ void main()
 }
 )";
 
-const char* kCompositorFS_xBRZ = R"(#version 140
+const char* kCompositorFS_xBRZ = kShaderHeader R"(
 
 #define BLEND_NONE 0
 #define BLEND_NORMAL 1
