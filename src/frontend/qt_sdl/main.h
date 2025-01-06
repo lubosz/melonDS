@@ -19,7 +19,11 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "glad/glad_gl43.h"
+#if defined(USE_OPENGL_ES)
+    #include "glad/glad_gles32.h"
+#else
+    #include "glad/glad_gl43.h"
+#endif
 
 #include <QApplication>
 #include <QEvent>

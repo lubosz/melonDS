@@ -47,7 +47,6 @@ set(SOURCES_QT_SDL
     ../ScreenLayout.cpp
     ../mic_blow.h
 
-    ../glad/glad_gl43.c
     ../duckstation/gl/context.cpp
 
     ${CMAKE_SOURCE_DIR}/res/melon.qrc
@@ -58,6 +57,12 @@ set(SOURCES_QT_SDL
     LANDialog.cpp
     NetplayDialog.cpp
 )
+
+if (USE_OPENGL_ES)
+    list(APPEND SOURCES_QT_SDL ../glad/glad_gles32.c)
+else()
+    list(APPEND SOURCES_QT_SDL ../glad/glad_gl43.c)
+endif()
 
 option(USE_QT6 "Use Qt 6 instead of Qt 5" ON)
 

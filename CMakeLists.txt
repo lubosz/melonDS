@@ -66,6 +66,10 @@ cmake_dependent_option(ENABLE_JIT "Enable JIT recompiler" ON
     "ARCHITECTURE STREQUAL x86_64 OR ARCHITECTURE STREQUAL ARM64" OFF)
 cmake_dependent_option(ENABLE_JIT_PROFILING "Enable JIT profiling with VTune" OFF "ENABLE_JIT" OFF)
 option(ENABLE_OGLRENDERER "Enable OpenGL renderer" ON)
+option(USE_OPENGL_ES "Use OpenGL ES 3.2" OFF)
+if(USE_OPENGL_ES)
+    add_definitions(-DUSE_OPENGL_ES)
+endif()
 
 check_ipo_supported(RESULT IPO_SUPPORTED)
 cmake_dependent_option(ENABLE_LTO_RELEASE "Enable link-time optimizations for release builds" ON "IPO_SUPPORTED" OFF)

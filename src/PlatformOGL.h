@@ -8,7 +8,11 @@
 // and that all targets get the same MELONDS_GL_HEADER definition.
 
 #ifndef MELONDS_GL_HEADER
-#define MELONDS_GL_HEADER "\"frontend/glad/glad_gl43.h\""
+    #if defined(USE_OPENGL_ES)
+        #define MELONDS_GL_HEADER "\"frontend/glad/glad_gles32.h\""
+    #else
+        #define MELONDS_GL_HEADER "\"frontend/glad/glad_gl43.h\""
+    #endif
 #endif
 
 #include MELONDS_GL_HEADER
