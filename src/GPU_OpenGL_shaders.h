@@ -78,7 +78,7 @@ void main()
             // 3D on top, blending
 
             float xpos = fTexcoord.x + _3dxpos;
-            float ypos = mod(fTexcoord.y, 192);
+            float ypos = mod(fTexcoord.y, 192.0f);
             ivec4 _3dpix = ivec4(texelFetch(_3DTex, ivec2(vec2(xpos, ypos)*u3DScale), 0).bgra
                          * vec4(63,63,63,31));
 
@@ -98,7 +98,7 @@ void main()
             // 3D on bottom, blending
 
             float xpos = fTexcoord.x + _3dxpos;
-            float ypos = mod(fTexcoord.y, 192);
+            float ypos = mod(fTexcoord.y, 192.0f);
             ivec4 _3dpix = ivec4(texelFetch(_3DTex, ivec2(vec2(xpos, ypos)*u3DScale), 0).bgra
                          * vec4(63,63,63,31));
 
@@ -118,7 +118,7 @@ void main()
             // 3D on top, normal/fade
 
             float xpos = fTexcoord.x + _3dxpos;
-            float ypos = mod(fTexcoord.y, 192);
+            float ypos = mod(fTexcoord.y, 192.0f);
             ivec4 _3dpix = ivec4(texelFetch(_3DTex, ivec2(vec2(xpos, ypos)*u3DScale), 0).bgra
                          * vec4(63,63,63,31));
 
