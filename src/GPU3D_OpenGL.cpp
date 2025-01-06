@@ -110,8 +110,8 @@ std::unique_ptr<GLRenderer> GLRenderer::New() noexcept
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_STENCIL_TEST);
 
-    glDepthRange(0, 1);
-    glClearDepth(1.0);
+    glDepthRangef(0.0f, 1.0f);
+    glClearDepthf(1.0f);
 
     if (!OpenGL::CompileVertexFragmentProgram(result->ClearShaderPlain,
             kClearVS, kClearFS,
