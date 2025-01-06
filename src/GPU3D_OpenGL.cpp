@@ -25,6 +25,18 @@
 #include "GPU.h"
 #include "GPU3D_OpenGL_shaders.h"
 
+#if defined(USE_OPENGL_ES)
+    // Support for these is checked in the glad loader.
+    // Requires GL_EXT_read_format_bgra
+    #define FORMAT_UNSIGNED_SHORT_1_5_5_5 GL_UNSIGNED_SHORT_1_5_5_5_REV_EXT
+    // Requires GL_APPLE_texture_format_BGRA8888
+    #define FORMAT_BGRA GL_BGRA_EXT
+#else
+    #define FORMAT_UNSIGNED_SHORT_1_5_5_5 GL_UNSIGNED_SHORT_1_5_5_5_REV
+    #define FORMAT_BGRA GL_BGRA
+#endif
+
+
 namespace melonDS
 {
 
@@ -276,7 +288,7 @@ std::unique_ptr<GLRenderer> GLRenderer::New() noexcept
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB5_A1, 1024, 48, 0, GL_RGBA, GL_UNSIGNED_SHORT_1_5_5_5_REV, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB5_A1, 1024, 48, 0, GL_RGBA, FORMAT_UNSIGNED_SHORT_1_5_5_5, NULL);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -1208,7 +1220,7 @@ void GLRenderer::RenderFrame(GPU& gpu)
         else if (mask & (1<<5)) vram = gpu.VRAM_F;
         else if (mask & (1<<6)) vram = gpu.VRAM_G;
 
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, i*8, 1024, 8, GL_RGBA, GL_UNSIGNED_SHORT_1_5_5_5_REV, vram);
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, i*8, 1024, 8, GL_RGBA, FORMAT_UNSIGNED_SHORT_1_5_5_5, vram);
     }
 
     glDisable(GL_SCISSOR_TEST);
@@ -1306,7 +1318,7 @@ void GLRenderer::PrepareCaptureFrame()
 
     glBindBuffer(GL_PIXEL_PACK_BUFFER, PixelbufferID);
     glBindFramebuffer(GL_READ_FRAMEBUFFER, DownscaleFramebuffer);
-    glReadPixels(0, 0, 256, 192, GL_BGRA, GL_UNSIGNED_BYTE, NULL);
+    glReadPixels(0, 0, 256, 192, FORMAT_BGRA, GL_UNSIGNED_BYTE, NULL);
 }
 
 void GLRenderer::Blit(const GPU& gpu)
