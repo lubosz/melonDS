@@ -28,7 +28,8 @@
 #if defined(USE_OPENGL_ES)
     // Support for these is checked in the glad loader.
     // Requires GL_EXT_read_format_bgra
-    #define FORMAT_UNSIGNED_SHORT_1_5_5_5 GL_UNSIGNED_SHORT_1_5_5_5_REV_EXT
+    //#define FORMAT_UNSIGNED_SHORT_1_5_5_5 GL_UNSIGNED_SHORT_1_5_5_5_REV_EXT
+    #define FORMAT_UNSIGNED_SHORT_1_5_5_5 GL_UNSIGNED_SHORT_5_5_5_1
     // Requires GL_APPLE_texture_format_BGRA8888
     #define FORMAT_BGRA GL_BGRA_EXT
 #else
