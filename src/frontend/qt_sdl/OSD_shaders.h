@@ -40,7 +40,7 @@ void main()
 
     vec2 osdpos = (vPosition * vec2(uOSDSize));
     fTexcoord = osdpos * uTexScale;
-    osdpos += uOSDPos;
+    osdpos += vec2(uOSDPos);
 
     fpos.xy = ((osdpos * 2.0) / uScreenSize * uScaleFactor) - 1.0;
     fpos.y *= -1.0;
